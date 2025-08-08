@@ -1,0 +1,70 @@
+# YOLOv8 Training Configuration for M1 MacBook Air
+# Optimized for Metal Performance Shaders (MPS) backend
+
+# Model configuration
+model: yolov8n.pt  # Start with nano model for faster iteration
+epochs: 100
+batch_size: 16  # Optimized for M1 GPU memory
+imgsz: 640
+
+# Device configuration
+device: mps  # Use Metal Performance Shaders on M1
+workers: 4   # Number of worker threads
+
+# Data augmentation
+hsv_h: 0.015  # HSV-Hue augmentation (fraction)
+hsv_s: 0.7    # HSV-Saturation augmentation (fraction)
+hsv_v: 0.4    # HSV-Value augmentation (fraction)
+degrees: 0.0  # Image rotation (+/- deg)
+translate: 0.1  # Image translation (+/- fraction)
+scale: 0.5     # Image scale (+/- gain)
+shear: 0.0     # Image shear (+/- deg)
+perspective: 0.0  # Image perspective (+/- fraction), range 0-0.001
+flipud: 0.0    # Image flip up-down (probability)
+fliplr: 0.5    # Image flip left-right (probability)
+mosaic: 1.0    # Image mosaic (probability)
+mixup: 0.0     # Image mixup (probability)
+copy_paste: 0.0  # Segment copy-paste (probability)
+
+# Optimization
+optimizer: SGD  # Optimizer (SGD, Adam, etc.)
+lr0: 0.01      # Initial learning rate
+lrf: 0.01      # Final learning rate (lr0 * lrf)
+momentum: 0.937  # SGD momentum/Adam beta1
+weight_decay: 0.0005  # Optimizer weight decay
+warmup_epochs: 3.0  # Warmup epochs (fractions ok)
+warmup_momentum: 0.8  # Warmup initial momentum
+warmup_bias_lr: 0.1  # Warmup initial bias lr
+box: 7.5       # Box loss gain
+cls: 0.5       # Class loss gain
+dfl: 1.5       # DFL loss gain
+pose: 12.0     # Pose loss gain
+kobj: 2.0      # Keypoint obj loss gain
+label_smoothing: 0.0  # Label smoothing epsilon
+nbs: 64        # Nominal batch size
+overlap_mask: True  # Masks should overlap during training (only train segment)
+mask_ratio: 4  # Mask downsample ratio (only train segment)
+dropout: 0.0   # Use dropout regularization (only train classify)
+
+# Validation
+val: True      # Validate during training
+save: True     # Save checkpoints
+save_period: -1  # Save checkpoint every x epochs (disabled if < 1)
+cache: False   # Cache images for faster training (RAM)
+
+# Logging and visualization
+plots: True    # Save plots for train/val
+save_txt: False  # Save results to *.txt
+save_conf: False  # Save confidences in --save-txt labels
+save_crop: False  # Save cropped prediction boxes
+show_labels: True  # Show labels on all images
+show_conf: True    # Show confidences on all images
+show_boxes: True   # Show boxes on all images
+conf: 0.001        # Confidence threshold
+iou: 0.6           # NMS IoU threshold
+max_det: 300       # Maximum number of detections per image
+half: True         # Use FP16 half-precision inference
+dnn: False         # Use OpenCV DNN for ONNX inference
+
+# Export
+format: torchscript  # Export format (torchscript, onnx, coreml, etc.)

@@ -1,0 +1,22 @@
+# YOLOv8 Dataset Configuration for Magic Card Recognition
+# This file defines the dataset structure and classes for training
+
+# Dataset paths
+path: ../data/processed  # Dataset root directory
+train: images/train  # Train images (relative to 'path')
+val: images/val      # Validation images (relative to 'path')
+test: images/test    # Test images (relative to 'path')
+
+# Classes
+names:
+  0: magic_card
+  1: pokemon_card
+  2: yugioh_card
+  3: business_card
+  4: playing_card
+
+# Number of classes
+nc: 5
+
+# Optional: Download script/URL (for automatic dataset download)
+# download: https://github.com/ultralytics/yolov5/releases/download/v1.0/
